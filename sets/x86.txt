@@ -1,0 +1,144 @@
+#---------------  TEMPLATE
+# op;secop;name;assparamnum;comments;machparamnum;machparamtype;c;p;a;z;s;o
+#---------------  
+#---------------  
+
+0x66;;;0;Forces the following instructions to swap into 16b (or 32b) mode;0;
+
+
+#---------------  32b COMPLETE
+0x04;;ADD;2;Stores sum of two values in first operand.;AL;8b value;1;imm8;carry (signed);lowest nibble parity; ;result is zero;result is negative (signed);overflow has occured (unsigned)
+0x05;;ADD;2;Stores sum of two values in first operand.;AX/EAX;16/32b value;1;imm32;carry (signed);lowest nibble parity; ;result is zero;result is negative (signed);overflow has occured (unsigned)
+0x80;0;ADD;2;Stores sum of two values in first operand.;8b register;8b value;2;modrm8;imm8;carry (signed);lowest nibble parity; ;result is zero;result is negative (signed);overflow has occured (unsigned)
+0x81;0;ADD;2;Stores sum of two values in first operand.;16/32b register;16/32b value;2;modrm32;imm32;carry (signed);lowest nibble parity; ;result is zero;result is negative (signed);overflow has occured (unsigned)
+0x83;0;ADD;2;Stores sum of two values in first operand.;16/32b register;8b value (sign-extended);2;modrm32;imm8;carry (signed);lowest nibble parity; ;result is zero;result is negative (signed);overflow has occured (unsigned)
+0x00;;ADD;2;Stores sum of two values in first operand.;8b register;8b register;1;modrm8;carry (signed);lowest nibble parity; ;result is zero;result is negative (signed);overflow has occured (unsigned)
+0x01;;ADD;2;Stores sum of two values in first operand.;16/32b register (with optional offset);16/32b register;1;modrm32;carry (signed);lowest nibble parity; ;result is zero;result is negative (signed);overflow has occured (unsigned)
+0x02;;ADD;2;Stores sum of two values in first operand.;8b register;8b register (with optional offset);1;modrm8;carry (signed);lowest nibble parity; ;result is zero;result is negative (signed);overflow has occured (unsigned)
+0x03;;ADD;2;Stores sum of two values in first operand.;16/32b register;16/32b register (with optional offset);1;modrm32;carry (signed);lowest nibble parity; ;result is zero;result is negative (signed);overflow has occured (unsigned)
+
+#---------------  32b COMPLETE
+0x24;;AND;2;ANDs operands and stores the result in first operand.;AL;8b value;1;imm8;0;lowest nibble parity;;result is zero (no matching  bits); ;0
+0x25;;AND;2;ANDs operands and stores the result in first operand.;AX/EAX;16/32b value;1;imm32;0;lowest nibble parity;;result is zero (no matching  bits); ;0
+0x80;4;AND;2;ANDs operands and stores the result in first operand.;8b register;8b value;2;modrm8;imm8;0;lowest nibble parity;;result is zero (no matching  bits); ;0
+0x81;4;AND;2;ANDs operands and stores the result in first operand.;16/32b register;16/32b value;2;modrm32;imm32;0;lowest nibble parity;;result is zero (no matching  bits); ;0
+0x83;4;AND;2;ANDs operands and stores the result in first operand;16/32b register;8b value (sign-extended);2;modrm32;imm8;0;lowest nibble parity;;result is zero (no matching  bits); ;0
+0x20;;AND;2;ANDs operands and stores the result in first operand.;8b register;8b register;1;modrm8;0;lowest nibble parity;;result is zero (no matching  bits); ;0
+0x21;;AND;2;ANDs operands and stores the result in first operand.;16/32b register (with optional offset);16/32b register;1;modrm32;0;lowest nibble parity;;result is zero (no matching  bits); ;0
+0x22;;AND;2;ANDs operands and stores the result in first operand.;8b register;8b register (with optional offset);1;modrm8;0;lowest nibble parity;;result is zero (no matching  bits); ;0
+0x23;;AND;2;ANDs operands and stores the result in first operand.;16/32b register;16/32b register (with optional offset);1;modrm32;0;lowest nibble parity;;result is zero (no matching  bits); ;0
+
+
+#---------------  displacement defined here as imm32! see doc! anyway 32b COMPLETE
+0xe8;;CALL;1;Call near (PUSHes EIP), relative indirect, offset relative to next instruction.;relative 16/32b address;1;imm32;affected if a task switch occurs;affected if a task switch occurs;affected if a task switch occurs;affected if a task switch occurs;affected if a task switch occurs;affected if a task switch occurs
+0xff;2;CALL;1;Call near (PUSHes EIP), absolute indirect.;relative 16/32b address;1;imm32;affected if a task switch occurs;affected if a task switch occurs;affected if a task switch occurs;affected if a task switch occurs;affected if a task switch occurs;affected if a task switch occurs
+0x9a;;CALL;1;Call far (PUSHes CS and EIP), absolute.;absolute 16/32b address;1;imm32;affected if a task switch occurs;affected if a task switch occurs;affected if a task switch occurs;affected if a task switch occurs;affected if a task switch occurs;affected if a task switch occurs
+0xff;3;CALL;1;Call far (PUSHes CS and EIP).;absolute indirect 16/32b address;1;imm32;affected if a task switch occurs;affected if a task switch occurs;affected if a task switch occurs;affected if a task switch occurs;affected if a task switch occurs;affected if a task switch occurs
+
+#---------------  32b COMPLETE
+0x3c;;CMP;2;Compares two operands (by subtracting the second from the first) and sets flags accordingly.;AL;8b value (immediate value is sign-extended to the length of the first operand);1;imm8; ; ; ;operands are equal;1 -> second operand is greater; ;
+0x3d;;CMP;2;Compares two operands (by subtracting the second from the first) and sets flags accordingly.;AX/EAX;16/32b value (immediate value is sign-extended to the length of the first operand);1;imm32; ; ; ;operands are equal;1 -> second operand is greater; ;
+0x80;7;CMP;2;Compares two operands (by subtracting the second from the first) and sets flags accordingly.;8b register;8b value (immediate value is sign-extended to the length of the first operand);2;modrm8;imm8; ; ; ;operands are equal;1 -> second operand is greater; ;
+0x81;7;CMP;2;Compares two operands (by subtracting the second from the first) and sets flags accordingly.;16/32b register;16/32b value (immediate value is sign-extended to the length of the first operand);2;modrm32;imm32; ; ; ;operands are equal;1 -> second operand is greater; ;
+0x83;7;CMP;2;Compares two operands (by subtracting the second from the first) and sets flags accordingly.;16/32b register;8b value (immediate value is sign-extended to the length of the first operand);2;modrm32;imm8; ; ; ;operands are equal;1 -> second operand is greater; ;
+0x38;;CMP;2;Compares two operands (by subtracting the second from the first) and sets flags accordingly.;8b register;8b register (with optional offset);1;modrm8; ; ; ;operands are equal;1 -> second operand is greater; ;
+0x39;;CMP;2;Compares two operands (by subtracting the second from the first) and sets flags accordingly.;16/32b register (with optional offset);16/32b register;1;modrm32; ; ; ;operands are equal;1 -> second operand is greater; ;
+0x3a;;CMP;2;Compares two operands (by subtracting the second from the first) and sets flags accordingly.;8b register (with optional offset);8b register;1;modrm8; ; ; ;operands are equal;1 -> second operand is greater; ;
+0x3b;;CMP;2;Compares two operands (by subtracting the second from the first) and sets flags accordingly.;16/32b register (with optional offset);16/32b register;1;modrm32; ; ; ;operands are equal;1 -> second operand is greater; ;
+
+
+#---------------  32b COMPLETE
+0xfe;1;DEC;1;Decrements given 8b register.;8b register;1;modrm8;; ; ;value has reached zero;value is negative;overflow has occured
+0xff;1;DEC;1;Decrements given 16/32b register.;16/32b register;1;modrm32;; ; ;value has reached zero;value is negative;overflow has occured
+0x48;;DEC;1;Decrements 32b register, invalid in 64b mode (REX prefix).;32b register;1;opcode+rd;; ; ;value has reached zero;value is negative;overflow has occured
+
+#---------------  32b COMPLETE
+0xfe;0;INC;1;Increments given 8b register.;8b register;1;modrm8;; ; ;value has reached zero;value is negative;overflow has occured
+0xff;0;INC;1;Increments given 16/32b register.;16/32b register;1;modrm32;; ; ;value has reached zero;value is negative;overflow has occured
+0x40;;INC;1;Increments 32b register, invalid in 64b mode (REX prefix).;32b register;1;opcode+rd;; ; ;value has reached zero;value is negative;overflow has occured
+
+
+0xcc;;INT3;0;Interrupt 3 -  trap to debugger.;0;may be altered;may be altered;may be altered;may be altered;may be altered;may be altered
+0xcd;;INT;1;Interrupt with specified vector;8b vector;1;imm8;may be altered;may be altered;may be altered;may be altered;may be altered;may be altered
+0xce;;INTO;0;Interrupt 4 - if overflow flag is 1;0;may be altered;may be altered;may be altered;may be altered;may be altered;may be altered
+
+#--------------- 32b, no segment COMPLETE
+0x88;;MOV;2;Copies value from first operand into the second (of same size). CS cannot be loaded.;8b register;8b register (with optional offset);1;modrm8;
+0x89;;MOV;2;Copies value from first operand into the second (of same size). CS cannot be loaded.;16/32b register;16/32b register (with optional offset);1;modrm32;
+0x8a;;MOV;2;Copies value from first operand into the second (of same size). CS cannot be loaded.;8b register (with optional offset);8b register;1;modrm8;
+0x8b;;MOV;2;Copies value from first operand into the second (of same size). CS cannot be loaded.;16/32b register (with optional offset);16/32b register;1;modrm32;
+0xa0;;MOV;2;Copies value from first operand into the second (of same size). CS cannot be loaded.;AL;data_segment:8b_offset;1;moffs8;
+0xa1;;MOV;2;Copies value from first operand into the second (of same size). CS cannot be loaded.;AX/EAX;data_segment:32b_offset;1;moffs32;
+0xa2;;MOV;2;Copies value from first operand into the second (of same size). CS cannot be loaded.;data_segment:8b_offset;AL;1;moffs8;
+0xa3;;MOV;2;Copies value from first operand into the second (of same size). CS cannot be loaded.;data_segment:32b_offset;AX/EAX;1;moffs32;
+0xb0;;MOV;2;Copies value from first operand into the second (of same size). CS cannot be loaded.;8b register;8b value;2;opcode+rb;imm8;
+0xb8;;MOV;2;Copies value from first operand into the second (of same size). CS cannot be loaded.;32b register;16/32b value;2;opcode+rd;imm32;
+0xc6;0;MOV;2;Copies value from first operand into the second (of same size). CS cannot be loaded.;8b register;8b value;2;modrm8;imm8;
+0xc7;0;MOV;2;Copies value from first operand into the second (of same size). CS cannot be loaded.;16/32b register;16/32b value;2;modrm32;imm32;
+
+0x90;;NOP;0;No Operation (alias to XCHG EAX, EAX);0;
+#---  multi-byte nops missing
+
+
+#---------------  32b COMPLETE
+0xf6;2;NOT;1;Negates operand (One's Complement);8b register;1;modrm8;
+0xf7;2;NOT;1;Negates operand (One's Complement);16/32b register;1;modrm32;
+
+#---------------  32b COMPLETE
+0x0c;;OR;2;ORs operands and stores the result in first operand.;AL;8b value;1;imm8;0; ;;operands are zero; ;0
+0x0d;;OR;2;ORs operands and stores the result in first operand.;AX/EAX;16/32b value;1;imm32;0; ;;operands are zero; ;0
+0x80;1;OR;2;ORs operands and stores the result in first operand.;8b register;8b value;2;modrm8;imm8;0; ;;operands are zero; ;0
+0x81;1;OR;2;ORs operands and stores the result in first operand.;16/32b register;16/32b value;2;modrm32;imm32;0; ;;operands are zero; ;0
+0x83;1;OR;2;ORs operands and stores the result in first operand;16/32b register;8b value (sign-extended);2;modrm32;imm8;0; ;;operands are zero; ;0
+0x08;;OR;2;ORs operands and stores the result in first operand.;8b register;8b register;1;modrm8;0; ;;operands are zero; ;0
+0x09;;OR;2;ORs operands and stores the result in first operand.;16/32b register (with optional offset);16/32b register;1;modrm32;0; ;;operands are zero; ;0
+0x0a;;OR;2;ORs operands and stores the result in first operand.;8b register;8b register (with optional offset);1;modrm8;0; ;;operands are zero; ;0
+0x0b;;OR;2;ORs operands and stores the result in first operand.;16/32b register;16/32b register (with optional offset);1;modrm32;0; ;;operands are zero; ;0
+
+#---------------  COMPLETE
+0x8f;0;POP;1;Pops value from stack into defined register;16/32/64b register;1;imm32
+0x58;;POP;1;Pops value from stack;16/32b register;1;opcode+rd;
+0x1f;;POP;0;Pops value from stack into DS;0
+0x07;;POP;0;Pops value from stack into ES;0
+0x17;;POP;0;Pops value from stack into SS;0
+0x0fa1;;POP;0;Pops value from stack into FS;0
+0x0fa9;;POP;0;Pops value from stack into GS;0
+0x61;;POPA/POPAD;0;Pops values from stack into DI, SI, BP, BX, DX, CX, AX (respectively corresponding doublewords). ESP on the stack is ignored and calculated instead.;0
+
+#---------------  COMPLETE
+0xff;6;PUSH;1;Puts register value onto the stack.;16/32/64b register;1;modrm32;
+0x50;;PUSH;1;Puts register value onto the stack.;16/32b register;1;opcode+rd;
+0x6a;;PUSH;1;Puts 8b value onto the stack.;8b value;1;imm8
+0x68;;PUSH;1;Puts 16/32b value onto the stack.; 16/32b value;1;imm32
+0x0e;;PUSH;0;Puts CS value onto the stack.;0;
+0x16;;PUSH;0;Puts SS value onto the stack.;0;
+0x1e;;PUSH;0;Puts DS value onto the stack.;0;
+0x06;;PUSH;0;Puts ES value onto the stack.;0;
+0x0fa0;;PUSH;0;Puts FS value onto the stack.;0;
+0x0fa8;;PUSH;0;Puts GS value onto the stack.;0;
+0x60;;PUSHA/PUSHAD;0;Puts contents of AX, CX, DX, BX, SP, BP, SI, DI (respectively corresponding doublewords) onto stack (preserving original SP/ESP value);0;
+
+#---------------  COMPLETE
+0xc3;;RET;0;Near (intrasegment - POPs EIP) return to calling procedure.;0;
+0xcb;;RET;0;Far (intersegment - POPs EIP and CS) return to calling procedure.;0;
+0xc2;;RET;1;Near (intrasegment - POPs EIP) return to calling procedure and stack unwinding.;number of bytes to unwind;1;imm16;
+0xca;;RET;1;Far (intersegment - POPs EIP and CS) return to calling procedure and stack unwinding.;number of bytes to unwind;1;imm16
+
+#---------------  32b COMPLETE
+0xa8;;TEST;2;ANDs operands and discards the result;AL;8b value;1;imm8;0; ;;operands have no bits equal; ;0
+0xa9;;TEST;2;ANDs operands and discards the result;AX/EAX;16/32b value;1;imm32;0; ;;operands have no bits equal; ;0
+0x84;;TEST;2;ANDs operands and discards the result;8b register;8b register;1;modrm8;0; ;;operands have no bits equal; ;0
+0x85;;TEST;2;ANDs operands and discards the result;16/32b register;16/32b register;1;modrm32;0; ;;operands have no bits equal; ;0
+0xf6;;TEST;2;ANDs operands and discards the result;8b register;8b value;2;modrm8;imm8;0; ;;operands have no bits equal; ;0
+0xf7;;TEST;2;ANDs operands and discards the result;16/32b register;16/32b value;2;modrm32;imm32;0; ;;operands have no bits equal; ;0
+
+#---------------  32b COMPLETE
+0x34;;XOR;2;XORs operands and puts the result into the first operand;AL;8b value;1;imm8;0; ;;operands are equal; ;0
+0x35;;XOR;2;XORs operands and puts the result into the first operand;AX/EAX;8b value;1;imm32;0; ;;operands are equal; ;0
+0x80;6;XOR;2;XORs operands and puts the result into the first operand;8b register;8b value;2;modrm8;imm8;0; ;;operands are equal; ;0
+0x81;6;XOR;2;XORs operands and puts the result into the first operand;16/32b register;16/32b value;2;modrm32;imm32;0; ;;operands are equal; ;0
+0x83;6;XOR;2;XORs operands and puts the result into the first operand;16/32b register;8b value (sign-extended);2;modrm32;imm8;0; ;;operands are equal; ;0
+0x30;;XOR;2;XORs operands and puts the result into the first operand;8b register (with optional offset);8b register;1;modrm8;0; ;;operands are equal; ;0
+0x31;;XOR;2;XORs operands and puts the result into the first operand;16/32b register (with optional offset);16/32b register;1;modrm32;0; ;;operands are equal; ;0
+0x32;;XOR;2;XORs operands and puts the result into the first operand;8b register;8b register (with optional offset);1;modrm8;0; ;;operands are equal; ;0
+0x33;;XOR;2;XORs operands and puts the result into the first operand;16/32b register;16/32b register (with optional offset);1;modrm32;0; ;;operands are equal; ;0
